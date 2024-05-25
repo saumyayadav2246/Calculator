@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		body {
+		    background-color: #f5f5f5;
+		    font-family: Arial, sans-serif;
+		    margin: 0;
+		    padding: 0;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    height: 100vh;
+		}
+
+		#Table1, #Table2 {
+		    margin-top: 20px;
+		}
+
+		#MainTextBox {
+		    padding: 20px;
+		    font-size: 1.5em;
+		    text-align: right;
+		    border: 2px solid #ddd;
+		    border-radius: 5px;
+		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		    background-color: #fff;
+		}
+
+		button {
+		    width: 60px;
+		    height: 60px;
+		    font-size: 1.2em;
+		    margin: 5px;
+		    border: none;
+		    border-radius: 10px;
+		    cursor: pointer;
+		    transition: background-color 0.3s, transform 0.3s;
+		}
+
+		button:active {
+		    transform: scale(0.95);
+		}
+
+		#AC {
+		    background-color: #ff6666;
+		    color: white;
+		}
+
+		#PluseOrMinus, #Modulo, #Division, #Multiplication, #Minus, #Pluse, #Equal {
+		    background-color: #4CAF50;
+		    color: gray;
+		}
+
+		#Equal {
+		    background-color: #f39c12;
+		}
+
+		button:not(#AC):not(#Equal) {
+		    background-color: #e0e0e0;
+		}
+
+		button:hover {
+		    background-color: #d4d4d4;
+		}
+
+		@media (max-width: 768px) {
+		    button {
+		        width: 50px;
+		        height: 50px;
+		        font-size: 1em;
+		    }
+
+		    #MainTextBox {
+		        font-size: 1.2em;
+		    }
+		}
+
+		@media (max-width: 480px) {
+		    button {
+		        width: 40px;
+		        height: 40px;
+		        font-size: 0.8em;
+		    }
+
+		    #MainTextBox {
+		        font-size: 1em;
+		    }
+		}
+
+	</style>
+	<!-- <link rel="stylesheet" type="text/css" href="D:\office\CSS\style19.css"> -->
+	<title>FlexiCalc</title>
+</head>
+<body>
+	<center>
+		<table id="Table1">
+			<tr>
+				<td>
+					<input type="text" id="MainTextBox">
+				</td>
+			</tr>
+		</table>
+		<table id="Table2">
+			<tr>
+				<td>
+					<button id="AC" onclick="OnClickedAC()">AC</button>
+				</td>
+				<td>
+					<button id="PluseOrMinus" onclick="OnClickedPluseOrMinus()">+/-</button>
+				</td>
+				<td>
+					<button id="Modulo" onclick="appendToDisplay('%')">%</button>
+				</td>
+				<td>
+					<button id="Division" onclick="appendToDisplay('/')">÷</button>	
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="Seven" onclick="appendToDisplay('7')">7</button>
+				</td>
+				<td>
+					<button id="Eight" onclick="appendToDisplay('8')">8</button>
+				</td>
+				<td>
+					<button id="Nine" onclick="appendToDisplay('9')">9</button>
+				</td>
+				<td>
+					<button id="Multiplication" ondblclick="appendToDisplay('*')">x</button>	
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="Four" onclick="appendToDisplay('4')">4</button>
+				</td>
+				<td>
+					<button id="Five" onclick="appendToDisplay('5')">5</button>
+				</td>
+				<td>
+					<button id="Six" onclick="appendToDisplay('6')">6</button>
+				</td>
+				<td>
+					<button id="Minus" onclick="appendToDisplay('-')">-</button>	
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="One" onclick="appendToDisplay('1')">1</button>
+				</td>
+				<td>
+					<button id="Two" onclick="appendToDisplay('2')">2</button>
+				</td>
+				<td>
+					<button id="Three" onclick="appendToDisplay('3')">3</button>
+				</td>
+				<td>
+					<button id="Pluse" onclick="appendToDisplay('+')">+</button>	
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="Backspace" onclick="OnClickedBackspace()">⌫</button>
+				</td>
+				<td>
+					<button id="Zero" onclick="appendToDisplay('0')">0</button>
+				</td>
+				<td>
+					<button id="Point" onclick="appendToDisplay('.')"><b>.</b></button>
+				</td>
+				<td>
+					<button id="Equal" onclick="OnClickedEqual()">=</button>	
+				</td>
+			</tr>
+		</table>
+		</table>
+	</center>
+	<!-- <script src="D:\practice\Example\JavaScript\script19.js"></script> -->
+	<script type="text/javascript">
+		var MainTextBox = document.getElementById('MainTextBox');
+		var MainTextBox2 = document.getElementById('MainTextBox2');
+		var Equal = document.getElementById('Equal');
+		var One = document.getElementById('One');
+		var Two = document.getElementById('Two');
+		var Three = document.getElementById('Three');
+		var Four = document.getElementById('Four');
+		var Five = document.getElementById('Five');
+		var Six = document.getElementById('Six');
+		var Seven = document.getElementById('Seven');
+		var Eight = document.getElementById('Eight');
+		var Nine = document.getElementById('Nine');
+		var Zero = document.getElementById('Zero');
+
+		function appendToDisplay(value) {
+			MainTextBox.value += value;
+		}
+
+		function OnClickedAC() {
+			MainTextBox.value = "";
+			location.reload();
+		}
+
+		function OnClickedPluseOrMinus() {
+			var value = MainTextBox.value;
+			MainTextBox.value = (`-${value}`);
+		}
+
+		function OnClickedBackspace() {
+			var MainTextBoxValue = MainTextBox.value;
+			var Sliced = MainTextBoxValue.slice(0, MainTextBoxValue.length-1);
+			MainTextBox.value = Sliced;
+		}
+
+		MainTextBox.addEventListener("keypress", function(event) {
+			  if (event.key === "Enter") {
+			    event.preventDefault();
+			    Equal.click();
+			}
+		});x
+
+		function OnClickedEqual() {
+		try {
+			document.getElementById('MainTextBox').value = eval(document.getElementById('MainTextBox').value);
+			} 
+		catch (error) {
+			document.getElementById("MainTextBox").style.fontSize = "medium";
+			document.getElementById('MainTextBox').value = 'Please Enter Valid Value';
+			document.getElementById("MainTextBox").style.fontSize = "large";
+			}
+		}
+	</script>
+</body>
+</html>
